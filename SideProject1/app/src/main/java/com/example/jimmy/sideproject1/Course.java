@@ -36,7 +36,7 @@ public class Course {
      *
      * @return the arraylist with key section code and value section information.
      */
-    public HashMap getSectionLst() {
+    public HashMap<String, Lecture> getSectionLst() {
         return sectionLst;
     }
 

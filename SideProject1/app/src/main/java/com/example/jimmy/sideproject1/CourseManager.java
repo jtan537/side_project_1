@@ -1,7 +1,7 @@
 package com.example.jimmy.sideproject1;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 /**
  * The manager class where manage the user input and change it into a timetable
@@ -25,65 +25,37 @@ public class CourseManager {
     }
 
     public ArrayList<Lecture> generate_timetable() {
-        Node<Lecture> timetable = new Node<>(null);
-        for (String key: courseLst.get(0).getSectionLst().keySet()){
-            timetable.addChild(courseLst.get(0).getSectionLst().get(key));
+        ArrayList<Lecture> timetable = new ArrayList<>();
+        for (String k : courseLst.get(0).getSectionLst().keySet()) {
+            for (String l : courseLst.get(1).getSectionLst().keySet()) {
+                if (!courseLst.get(0).getSectionLst().get(k).hasOverlap(courseLst.get(1).getSectionLst().get(l))) {
+                    Lecture temp = merge(courseLst.get(0).getSectionLst().get(k), courseLst.get(1).getSectionLst().get(l));
+                    for (String x : courseLst.get(2).getSectionLst().keySet()) {
+                        if (!temp.hasOverlap(courseLst.get(2).getSectionLst().get(x))) {
+                            temp = merge(temp, courseLst.get(2).getSectionLst().get(x));
+                            for (String y : courseLst.get(3).getSectionLst().keySet()) {
+                                if (!temp.hasOverlap(courseLst.get(3).getSectionLst().get(y))) {
+                                    temp = merge(temp, courseLst.get(3).getSectionLst().get(y));
+                                    for (String z : courseLst.get(4).getSectionLst().keySet()) {
+                                        if (!temp.hasOverlap(courseLst.get(4).getSectionLst().get(z))) {
+                                            temp = merge(temp, courseLst.get(4).getSectionLst().get(z));
+                                            timetable.add(temp);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
-
+        return timetable;
     }
 
-    private class Node<T> {
-        private List<Node<T>> children = new ArrayList<Node<T>>();
-        private Node<T> parent = null;
-        private T data = null;
-
-        public Node(T data) {
-            this.data = data;
-        }
-
-        public Node(T data, Node<T> parent) {
-            this.data = data;
-            this.parent = parent;
-        }
-
-        public List<Node<T>> getChildren() {
-            return children;
-        }
-
-        public void setParent(Node<T> parent) {
-            parent.addChild(this);
-            this.parent = parent;
-        }
-
-        public void addChild(T data) {
-            Node<T> child = new Node<T>(data);
-            child.setParent(this);
-            this.children.add(child);
-        }
-
-        public void addChild(Node<T> child) {
-            child.setParent(this);
-            this.children.add(child);
-        }
-
-        public T getData() {
-            return this.data;
-        }
-
-        public void setData(T data) {
-            this.data = data;
-        }
-
-        public boolean isRoot() {
-            return (this.parent == null);
-        }
-
-        public boolean isLeaf() {
-            return this.children.size() == 0;
-        }
-
-        public void removeParent() {
-            this.parent = null;
-        }
+    private Lecture merge(Lecture lec1, Lecture lec2) {
+        HashMap<String, int[]> temp = new HashMap<>();
+        temp.putAll(lec1.getTimeLst());
+        temp.putAll(lec2.getTimeLst());
+        return new Lecture(lec1.getSectionCode() + lec2.getSectionCode(), temp);
     }
 }
