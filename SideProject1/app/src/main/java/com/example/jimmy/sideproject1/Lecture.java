@@ -15,23 +15,46 @@ public class Lecture {
     private HashMap<String, int[]> timeLst;
 
     /**
-     * The section code for this course
+     * The section code for this course, i.e. 'Lec 0501'
      */
     private String sectionCode;
 
-    public Lecture (String sectionCode, HashMap<String, int[]> time){
+    /**
+     * Initialize the lecture object but set the hashmap and section code
+     *
+     * @param sectionCode section code as a string, i.e. 'Lec 0501'
+     * @param time        the list with starting time and end time, i.e. [18, 21]
+     */
+    public Lecture(String sectionCode, HashMap<String, int[]> time) {
         this.sectionCode = sectionCode;
         this.timeLst = time;
     }
 
+    /**
+     * Return the hashmap contains all time information about this section.
+     * Format: {'Monday': [18, 21], 'Friday': [14, 16]}
+     *
+     * @return The time hashmao
+     */
     public HashMap<String, int[]> getTimeLst() {
         return timeLst;
     }
 
+    /**
+     * Return the section code
+     *
+     * @return section code as a string, i.e. 'Lec0501'.
+     */
     public String getSectionCode() {
         return sectionCode;
     }
 
+    /**
+     * Check if other lecture has any time overlap with this lecture.
+     *
+     * @param o other lecture object to check
+     * @return true if two lecture has any time overlap, false otherwise.
+     */
     public boolean hasOverlap(Lecture o) {
         for (String key : o.getTimeLst().keySet()) {
             if (timeLst.containsKey(key) && (overLap(timeLst.get(key), o.getTimeLst().get(key)))) {
@@ -41,7 +64,14 @@ public class Lecture {
         return false;
     }
 
-    private boolean overLap(int[] lst1, int[] lst2){
+    /**
+     * A helper to check if two list have any time overlap
+     *
+     * @param lst1 the first list with two integers, first is starting time and second is end time.
+     * @param lst2 second list in the format same as above
+     * @return true if two list have overlap false otherwise.
+     */
+    private boolean overLap(int[] lst1, int[] lst2) {
         return (lst1[1] > lst2[0] || lst1[1] < lst2[1]) ||
                 (lst1[0] > lst2[0] || lst1[0] < lst2[1]) ||
                 lst1 == lst2;
