@@ -6,4 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".TimetableActivity">
 
+    <GridView
+        android:id="@+id/ScoreBoardGridView"
+        android:layout_width="383dp"
+        android:layout_height="509dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:columnWidth="100dp"
+        android:gravity="center"
+        android:numColumns="6"
+        android:stretchMode="columnWidth"></GridView>
+
+
 </android.support.constraint.ConstraintLayout>
