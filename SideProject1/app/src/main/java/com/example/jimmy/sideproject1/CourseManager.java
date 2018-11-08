@@ -2,6 +2,8 @@ package com.example.jimmy.sideproject1;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * The manager class where manage the user input and change it into a timetable
@@ -10,7 +12,7 @@ public class CourseManager {
     /**
      * The list contains all course object
      */
-    private ArrayList<Course> courseLst = new ArrayList<>();
+    private List<Course> courseLst = new ArrayList<>();
 
     /**
      * Initialize the course list by get information for each course code and change it into a
@@ -18,10 +20,51 @@ public class CourseManager {
      *
      * @param courseCodeLst the list contains all the course object.
      */
-    public CourseManager(ArrayList<String> courseCodeLst) throws IOException {
+    public CourseManager(List<String> courseCodeLst) throws IOException {
         for (String s : courseCodeLst) {
-            this.courseLst.add(infoSlicer.instantiateCourse(s));
+            this.courseLst.add(createCourse(infoSlicer.instantiateDailyClasses(s)));
         }
+    }
+
+    /**
+     * A helper to create a Lecture object based on a section code and a list of DailyClass objects.
+     *
+     * @param all_class   the list contains all the DailyClass object
+     * @param sectionCode the section code as a string
+     * @return Lecture object with section code given.
+     */
+    private Lecture createLecture(List<DailyClass> all_class, String sectionCode) {
+        Lecture return_lecture = new Lecture(all_class.get(0).getCourseCode(), sectionCode, new ArrayList<DailyClass>());
+        for (DailyClass c : all_class) {
+            if (c.getSectionCode().equals(sectionCode)) {
+                return_lecture.addClass(c);
+            }
+        }
+        return return_lecture;
+    }
+
+    /**
+     * A helper to create a Course object based on the list contains all DailyClass objects this course has
+     * @param all_class the list contains all classes this course has
+
+     * @return a Course object.
+     */
+    private Course createCourse(List<DailyClass> all_class) {
+        HashMap<String, ArrayList<DailyClass>> temp = new HashMap<>();
+        for (DailyClass c : all_class) {
+            if (temp.containsKey(c.getSectionCode())) {
+                temp.get(c.getSectionCode()).add(c);
+            } else {
+                ArrayList<DailyClass> temp_list = new ArrayList<>();
+                temp_list.add(c);
+                temp.put(c.getSectionCode(), temp_list);
+            }
+        }
+        Course return_course = new Course(all_class.get(0).getCourseCode(), new ArrayList<Lecture>());
+        for (String key : temp.keySet()) {
+            return_course.addLecture(createLecture(temp.get(key), key));
+        }
+        return return_course;
     }
 
     /**

@@ -37,6 +37,10 @@ public class Course {
         return sectionLst;
     }
 
+    public void addLecture(Lecture newLecture){
+        this.sectionLst.add(newLecture);
+    }
+
     @Override
     public String toString() {
         return "Course{" +

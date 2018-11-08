@@ -1,6 +1,7 @@
 package com.example.jimmy.sideproject1;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * The lecture class with some properties.
@@ -10,7 +11,6 @@ public class Lecture {
     /**
      * The hashmap contains all sections of this course, te keys are the section number and the
      * values are the time
-     * The format: {'Monday': [18, 21], 'Wednesday': [17, 20]}
      */
     private ArrayList<DailyClass> timeLst;
 
@@ -34,6 +34,10 @@ public class Lecture {
         this.sectionCode = sectionCode;
         this.timeLst = time;
         this.courseCode = course;
+    }
+
+    public void addClass(DailyClass class_){
+        this.timeLst.add(class_);
     }
 
     /**
@@ -72,7 +76,8 @@ public class Lecture {
      */
     public boolean hasOverlap(Lecture o) {
         for (DailyClass c : timeLst) {
-            if (findData(c.getDate(), o.getTimeLst()) != null && (overLap(c, o.findData(c.getDate(), o.getTimeLst())))) {
+            if (findData(c.getDate(), o.getTimeLst()) != null && (overLap(c,
+                    Objects.requireNonNull(o.findData(c.getDate(), o.getTimeLst()))))) {
                 return true;
             }
         }
