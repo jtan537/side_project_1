@@ -103,7 +103,7 @@ public final class infoSlicer {
      * @return           The list of DailyClasses.
      * @throws IOException
      */
-    private static List<DailyClass> instantiateDailyClasses(String courseCode) throws IOException{
+    public static List<DailyClass> instantiateDailyClasses(String courseCode) throws IOException{
         List<String> courseInfo = textScraper.getCourseInfo(courseCode);
         List<List<String>> slicedCourseInfo = sliceCourseInfo(courseInfo);
         List<DailyClass> dailyClasses= new ArrayList<>();
