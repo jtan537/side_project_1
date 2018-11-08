@@ -2,6 +2,7 @@ package com.example.jimmy.sideproject1;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * The course class with some properties of object Course
@@ -24,7 +25,7 @@ public class Course {
      * @param sectionlst the list contains all section information (lecture objects)
      * @param courseCode the course code as a string
      */
-    public Course(String courseCode, ArrayList<Lecture> sectionlst) {
+    public Course(String courseCode, List<Lecture> sectionlst) {
         this.courseCode = courseCode;
         for (Lecture l : sectionlst) {
             this.sectionLst.put(l.getSectionCode(), l);
@@ -38,6 +39,14 @@ public class Course {
      */
     public HashMap<String, Lecture> getSectionLst() {
         return sectionLst;
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "sectionLst=" + sectionLst +
+                ", courseCode='" + courseCode + '\'' +
+                '}';
     }
 
     /**
