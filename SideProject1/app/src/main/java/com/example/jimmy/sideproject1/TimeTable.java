@@ -23,16 +23,16 @@ public class TimeTable {
     public TimeTable(Lecture lecture) {
         for (DailyClass d : lecture.getTimeLst()) {
             switch (d.getDate()) {
-                case "Monday":
+                case "MONDAY":
                     MonClass.add(d);
                     break;
-                case "Tuesday":
+                case "TUESDAY":
                     TueClass.add(d);
                     break;
-                case "Wednesday":
+                case "WEDNESDAY":
                     WedClass.add(d);
                     break;
-                case "Thursday":
+                case "THURSDAY":
                     ThuClass.add(d);
                     break;
                 default:
@@ -85,5 +85,16 @@ public class TimeTable {
      */
     public ArrayList<DailyClass> getFriClass() {
         return FriClass;
+    }
+
+    @Override
+    public String toString() {
+        return "TimeTable{" +
+                "MonClass=" + MonClass +
+                ", TueClass=" + TueClass +
+                ", WedClass=" + WedClass +
+                ", ThuClass=" + ThuClass +
+                ", FriClass=" + FriClass +
+                '}';
     }
 }

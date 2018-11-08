@@ -1,6 +1,7 @@
 package com.example.jimmy.sideproject1;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -12,7 +13,7 @@ public class Lecture {
      * The hashmap contains all sections of this course, te keys are the section number and the
      * values are the time
      */
-    private ArrayList<DailyClass> timeLst;
+    private List<DailyClass> timeLst;
 
     /**
      * The section code for this course, i.e. 'Lec 0501'
@@ -30,7 +31,7 @@ public class Lecture {
      * @param sectionCode section code as a string, i.e. 'Lec 0501'
      * @param time        the list with starting time and end time, i.e. [18, 21]
      */
-    public Lecture(String course, String sectionCode, ArrayList<DailyClass> time) {
+    public Lecture(String course, String sectionCode, List<DailyClass> time) {
         this.sectionCode = sectionCode;
         this.timeLst = time;
         this.courseCode = course;
@@ -38,10 +39,10 @@ public class Lecture {
 
     /**
      * Add a new class to the time list
-
+     *
      * @param class_ the new DailyClass object to add.
      */
-    public void addClass(DailyClass class_){
+    public void addClass(DailyClass class_) {
         this.timeLst.add(class_);
     }
 
@@ -51,7 +52,7 @@ public class Lecture {
      *
      * @return The time hashmao
      */
-    public ArrayList<DailyClass> getTimeLst() {
+    public List<DailyClass> getTimeLst() {
         return timeLst;
     }
 
@@ -81,9 +82,12 @@ public class Lecture {
      */
     public boolean hasOverlap(Lecture o) {
         for (DailyClass c : timeLst) {
-            if (findData(c.getDate(), o.getTimeLst()) != null && (overLap(c,
-                    Objects.requireNonNull(o.findData(c.getDate(), o.getTimeLst()))))) {
-                return true;
+            if (findDate(c.getDate(), o.getTimeLst()).size() > 0) {
+                for (DailyClass d: findDate(c.getDate(), o.getTimeLst())){
+                    if (overLap(c, d)){
+                        return true;
+                    }
+                }
             }
         }
         return false;
@@ -96,13 +100,14 @@ public class Lecture {
      * @param lst  the arraylist contains DailyClass object to check.
      * @return the object has the same date, null otherwise.
      */
-    private DailyClass findData(String date, ArrayList<DailyClass> lst) {
+    private ArrayList<DailyClass> findDate(String date, List<DailyClass> lst) {
+        ArrayList<DailyClass> return_list = new ArrayList<>();
         for (DailyClass d : lst) {
             if (d.getDate().equals(date)) {
-                return d;
+                return_list.add(d);
             }
         }
-        return null;
+        return return_list;
     }
 
     /**
@@ -112,9 +117,22 @@ public class Lecture {
      * @param lst2 second list in the format same as above
      * @return true if two list have overlap false otherwise.
      */
-    private boolean overLap(DailyClass lst1, DailyClass lst2) {
-        return (lst1.getEnd() > lst2.getStart() || lst1.getEnd() < lst2.getEnd()) ||
-                (lst1.getStart() > lst2.getStart() || lst1.getStart() < lst2.getEnd()) ||
-                lst1 == lst2;
+
+    //
+    public static boolean overLap(DailyClass lst1, DailyClass lst2) {
+        return ((lst1.getEnd() > lst2.getStart() && lst1.getEnd() < lst2.getEnd())) ||
+                ((lst1.getStart() > lst2.getStart() && lst1.getStart() < lst2.getEnd())) ||
+                (lst2.getEnd() > lst1.getStart() && lst2.getEnd() < lst1.getEnd()) ||
+                ((lst2.getStart() > lst1.getStart() && lst2.getStart() < lst1.getEnd())) ||
+                (lst1.getStart() == lst2.getStart() && lst1.getEnd() == lst2.getEnd());
+    }
+
+    @Override
+    public String toString() {
+        return "Lecture{" +
+                "timeLst=" + timeLst +
+                ", sectionCode='" + sectionCode + '\'' +
+                ", courseCode='" + courseCode + '\'' +
+                '}';
     }
 }

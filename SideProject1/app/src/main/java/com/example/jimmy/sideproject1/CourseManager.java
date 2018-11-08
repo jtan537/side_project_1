@@ -9,6 +9,10 @@ import java.util.List;
  * The manager class where manage the user input and change it into a timetable
  */
 public class CourseManager {
+    public List<Course> getCourseLst() {
+        return courseLst;
+    }
+
     /**
      * The list contains all course object
      */
@@ -107,6 +111,9 @@ public class CourseManager {
                 }
             }
         }
+        for (Lecture l: timetable){
+            System.out.println(l+"\n");
+        }
         return decoder(timetable);
     }
 
@@ -135,6 +142,6 @@ public class CourseManager {
         ArrayList<DailyClass> temp = new ArrayList<>();
         temp.addAll(lec1.getTimeLst());
         temp.addAll(lec2.getTimeLst());
-        return new Lecture(lec1.getCourseCode() + lec2.getCourseCode(), lec1.getSectionCode() + lec2.getSectionCode(), temp);
+        return new Lecture("temp", "temp", temp);
     }
 }

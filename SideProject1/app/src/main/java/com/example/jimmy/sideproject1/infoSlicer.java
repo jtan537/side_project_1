@@ -105,7 +105,9 @@ public final class infoSlicer {
      */
     public static List<DailyClass> instantiateDailyClasses(String courseCode) throws IOException{
         List<String> courseInfo = textScraper.getCourseInfo(courseCode);
+
         List<List<String>> slicedCourseInfo = sliceCourseInfo(courseInfo);
+        System.out.println(slicedCourseInfo);
         List<DailyClass> dailyClasses= new ArrayList<>();
         for(List lecture: slicedCourseInfo){
             // Initialize the information to create classes from
@@ -114,7 +116,8 @@ public final class infoSlicer {
             for(List day: curGroupedDateTime) {
                 //Initialize the daily class for this particular day, where day = (Day, start, end)
                 DailyClass curDailyClass = new DailyClass((String) day.get(0), courseCode,
-                        curLectureSection, (int) day.get(1), (int) day.get(2));
+                        curLectureSection,  Integer.valueOf((String)day.get(1)),
+                        Integer.valueOf((String)day.get(2)));
                 dailyClasses.add(curDailyClass);
             }
         }

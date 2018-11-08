@@ -57,5 +57,47 @@ public class demo {
          * Test the instantiateLectures.
          */
         //System.out.println(infoSlicer.instantiateLectures(textScraper.getCourseInfo("ACT230H1F")));
+
+        /**
+         * Test the DailyClass
+         */
+//        System.out.println(infoSlicer.instantiateDailyClasses("CSC148H1F"));
+
+        /**
+         * Test the overlap, screw with start and end values, and all edge cases - works
+         */
+//        DailyClass d1 = new DailyClass("MONDAY", "CSC108H1F", "LEC101", 10, 11);
+//        DailyClass d2 = new DailyClass("MONDAY", "CSC109H1F", "LEC102", 11, 14);
+//        System.out.println(Lecture.overLap(d1, d2));
+
+        /**
+         * Test hasOverlap on CSC207 and CSC404 lectures 5101,5101 respectively.
+         */
+//        List<DailyClass> d = new ArrayList<>();
+//        DailyClass d1 = new DailyClass("WEDNESDAY", "CSC207H1F", "LEC5101", 17, 18);
+//        DailyClass d2 = new DailyClass("WEDNESDAY", "CSC207H1F", "LEC5101", 18, 19);
+//        d.add(d1);
+//        d.add(d2);
+//        Lecture csc207 = new Lecture("CSC207H1F", "LEC5101", d);
+//
+//        List<DailyClass> g = new ArrayList<>();
+//        DailyClass d3 = new DailyClass("WEDNESDAY", "CSC404H1F", "LEC5101", 20, 21);
+//        DailyClass d4 = new DailyClass("WEDNESDAY", "CSC404H1F", "LEC5101", 18, 20);
+//        g.add(d3);
+//        g.add(d4);
+//        Lecture CSC404 = new Lecture("CSC404H1F", "LEC5101", g);
+//
+//        System.out.println(csc207.hasOverlap(CSC404));
+        /**
+         * Test main CourseManager
+         */
+        List<String> course = new ArrayList<>();
+        course.add("FOR200H1F");
+        course.add("STA247H1F");
+        course.add("NEW101H1F");
+        course.add("CSC104H1F");
+        course.add("CSC207H1F");
+        CourseManager m1 = new CourseManager(course);
+        System.out.println(m1.generate_timetable());
     }
 }
