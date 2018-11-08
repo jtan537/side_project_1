@@ -37,6 +37,11 @@ public class Course {
         return sectionLst;
     }
 
+    /**
+     * Add a new lecture to the lecture list.
+
+     * @param newLecture the new lecture to add.
+     */
     public void addLecture(Lecture newLecture){
         this.sectionLst.add(newLecture);
     }

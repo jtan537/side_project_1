@@ -36,6 +36,11 @@ public class Lecture {
         this.courseCode = course;
     }
 
+    /**
+     * Add a new class to the time list
+
+     * @param class_ the new DailyClass object to add.
+     */
     public void addClass(DailyClass class_){
         this.timeLst.add(class_);
     }
