@@ -110,23 +110,25 @@ public final class infoSlicer {
         // Take all values of sliced course info, and change the date time to a hashmap.
         List<List> mappedDateTime = new ArrayList();
         for(List lst: slicedCourseInfo){
-            Map<String, int[]> curMappedDateTime = new HashMap<>();
+            // The hash-map according to the lecture class.
+            Map<String, Time> curMappedDateTime = new HashMap<>();
             // Get the current grouped date time, from lst.
             List<List<String>> curGroupedDateTime = groupBrokenString(breakUpDateTime((String)lst.get(1)), 3);
             for(List group: curGroupedDateTime){
                 // Initialize current values.
                 String curDay = "";
-                int[] curTime = new int[2];
+
                 // Set the start/end time to the corresponding grouped value, casted as an int
-                curTime[0] = Integer.valueOf((String)group.get(1));
-                curTime[1] = Integer.valueOf((String)group.get(2));
+                int startTime = Integer.valueOf((String)group.get(1));
+                int endTime = Integer.valueOf((String)group.get(2));
+                Time curTime = new Time(startTime, endTime);
                 curDay = (String)group.get(0);
 
                 // Add to current hashmap
                 curMappedDateTime.put(curDay, curTime);
             }
             // After finished the hashmap for the current lecture section, set the sliced info's
-            // date time index to the hashmap, which is always index 2 according U of T format.
+            // date time index to the hashmap, which is always index 1 according U of T format.
             lst.set(1, curMappedDateTime);
             mappedDateTime.add(lst);
         }
@@ -137,12 +139,14 @@ public final class infoSlicer {
      * Returns a list of lectures, given a course.
      * PRECONDITION:     courseInfo is a list returned by getCourseInfo.
      * @param courseInfo a list of all the course info, scraped on the U of T coursefinder site.
-     * @return
+     * @return           a list of lecture objects given a course.
      */
     private static List<Lecture> instantiateLectures(List<String> courseInfo){
         List<List> mappedCourseInfo = mapDateTime(courseInfo);
         List<Lecture> lectures = new ArrayList<>();
         for(List lst: mappedCourseInfo){
+            // Initialize the lecture with the lecture string(LEC 5101) and the time object.
+            // Can modify lecture to take in additional info, such as
             Lecture curLecture = new Lecture((String)lst.get(0), (HashMap)lst.get(1));
             lectures.add(curLecture);
         }
