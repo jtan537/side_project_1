@@ -50,11 +50,11 @@ public class CourseManager {
                 }
             }
         }
-        return timetable;
+        return timetable.;
     }
 
     private Lecture merge(Lecture lec1, Lecture lec2) {
-        HashMap<String, int[]> temp = new HashMap<>();
+        HashMap<String, Time> temp = new HashMap<>();
         temp.putAll(lec1.getTimeLst());
         temp.putAll(lec2.getTimeLst());
         return new Lecture(lec1.getSectionCode() + lec2.getSectionCode(), temp);

@@ -12,7 +12,7 @@ public class Lecture {
      * values are the time
      * The format: {'Monday': [18, 21], 'Wednesday': [17, 20]}
      */
-    private HashMap<String, int[]> timeLst;
+    private HashMap<String, Time> timeLst;
 
     /**
      * The section code for this course, i.e. 'Lec 0501'
@@ -25,7 +25,7 @@ public class Lecture {
      * @param sectionCode section code as a string, i.e. 'Lec 0501'
      * @param time        the list with starting time and end time, i.e. [18, 21]
      */
-    public Lecture(String sectionCode, HashMap<String, int[]> time) {
+    public Lecture(String sectionCode, HashMap<String, Time> time) {
         this.sectionCode = sectionCode;
         this.timeLst = time;
     }
@@ -36,7 +36,7 @@ public class Lecture {
      *
      * @return The time hashmao
      */
-    public HashMap<String, int[]> getTimeLst() {
+    public HashMap<String, Time> getTimeLst() {
         return timeLst;
     }
 
@@ -71,9 +71,9 @@ public class Lecture {
      * @param lst2 second list in the format same as above
      * @return true if two list have overlap false otherwise.
      */
-    private boolean overLap(int[] lst1, int[] lst2) {
-        return (lst1[1] > lst2[0] || lst1[1] < lst2[1]) ||
-                (lst1[0] > lst2[0] || lst1[0] < lst2[1]) ||
+    private boolean overLap(Time lst1, Time lst2) {
+        return (lst1.getEnd() > lst2.getStart() || lst1.getEnd() < lst2.getEnd()) ||
+                (lst1.getStart() > lst2.getStart() || lst1.getStart() < lst2.getEnd()) ||
                 lst1 == lst2;
     }
 }
