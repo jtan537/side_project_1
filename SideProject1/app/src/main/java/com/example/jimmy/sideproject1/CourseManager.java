@@ -1,5 +1,6 @@
 package com.example.jimmy.sideproject1;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -18,9 +19,9 @@ public class CourseManager {
      *
      * @param courseCodeLst the list contains all the course object.
      */
-    public CourseManager(ArrayList<String> courseCodeLst) {
+    public CourseManager(ArrayList<String> courseCodeLst) throws IOException {
         for (String s : courseCodeLst) {
-            this.courseLst.add(getCourse(s));
+            this.courseLst.add(infoSlicer.instantiateCourse(s));
         }
     }
 
