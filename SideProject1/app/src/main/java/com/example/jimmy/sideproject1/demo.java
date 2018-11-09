@@ -6,6 +6,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.lang.reflect.Array;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -88,6 +89,20 @@ public class demo {
 //        Lecture CSC404 = new Lecture("CSC404H1F", "LEC5101", g);
 //
 //        System.out.println(csc207.hasOverlap(CSC404));
+
+        /**
+         * Test instantiateDailyClasses
+         */
+        //System.out.println(textScraper.getCourseInfo("CSC104H1F"));
+        //System.out.println(infoSlicer.instantiateDailyClasses("CSC104H1F"));
+
+        /**
+         * Test timetable creation.
+         */
+//        List<DailyClass> forDaily = infoSlicer.instantiateDailyClasses("FOR200H1F");
+//        Lecture tempLec = new Lecture("FOR200H1F", "LEC 5101", forDaily);
+//        TimeTable t = new TimeTable(tempLec);
+//        System.out.println(t);
         /**
          * Test main CourseManager
          */
@@ -96,8 +111,10 @@ public class demo {
         course.add("STA247H1F");
         course.add("NEW101H1F");
         course.add("CSC104H1F");
-        course.add("CSC207H1F");
+        course.add("CSC404H1F");
         CourseManager m1 = new CourseManager(course);
-        System.out.println(m1.generate_timetable());
+        List<TimeTable> t = new ArrayList<>();
+
+        System.out.println(m1.generate_timetable().size());
     }
 }

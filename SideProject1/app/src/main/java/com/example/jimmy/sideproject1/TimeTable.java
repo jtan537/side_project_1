@@ -9,11 +9,12 @@ public class TimeTable {
     /**
      * The Arraylist contains classes on each day of the week.
      */
-    private ArrayList<DailyClass> MonClass;
-    private ArrayList<DailyClass> TueClass;
-    private ArrayList<DailyClass> WedClass;
-    private ArrayList<DailyClass> ThuClass;
-    private ArrayList<DailyClass> FriClass;
+    //NEEDED TO INITIALIZE THE ARRAYS U FUCKING RETARD.
+    private ArrayList<DailyClass> MonClass = new ArrayList<>();
+    private ArrayList<DailyClass> TueClass = new ArrayList<>();
+    private ArrayList<DailyClass> WedClass = new ArrayList<>();
+    private ArrayList<DailyClass> ThuClass = new ArrayList<>();
+    private ArrayList<DailyClass> FriClass = new ArrayList<>();
 
     /**
      * Putting each DailyClass object into corresponding list according to its date.

@@ -125,8 +125,8 @@ public class CourseManager {
      */
     private ArrayList<TimeTable> decoder(ArrayList<Lecture> timetable) {
         ArrayList<TimeTable> timeTable = new ArrayList<>();
-        for (Lecture l : timetable) {
-            timeTable.add(new TimeTable(l));
+        for (Lecture lec : timetable) {
+            timeTable.add(new TimeTable(lec));
         }
         return timeTable;
     }

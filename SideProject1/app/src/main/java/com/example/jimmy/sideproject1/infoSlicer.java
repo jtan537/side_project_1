@@ -22,15 +22,22 @@ public final class infoSlicer {
     private static List<List<String>> sliceCourseInfo(List<String> courseInfo){
         List<List<String>> slicedInfo = new ArrayList<>();
         List<String> curLecSlice = new ArrayList<>();
+        //IGNORE TUTORIALS FOR NOW.
+        boolean wasLecture = false;
+
         for (String i: courseInfo){
             if(i.contains("Lec ")) {
                 slicedInfo.add(curLecSlice);
                 curLecSlice = new ArrayList<>();
+                wasLecture = true;
             // Ignore tutorials for now.
             } else if (i.contains("Tut ")) {
-                break;
+                wasLecture = false;
             }
-            curLecSlice.add(i);
+
+            if(wasLecture == true) {
+                curLecSlice.add(i);
+            }
         }
         // Add the final slice
         slicedInfo.add(curLecSlice);
@@ -107,7 +114,7 @@ public final class infoSlicer {
         List<String> courseInfo = textScraper.getCourseInfo(courseCode);
 
         List<List<String>> slicedCourseInfo = sliceCourseInfo(courseInfo);
-        System.out.println(slicedCourseInfo);
+
         List<DailyClass> dailyClasses= new ArrayList<>();
         for(List lecture: slicedCourseInfo){
             // Initialize the information to create classes from

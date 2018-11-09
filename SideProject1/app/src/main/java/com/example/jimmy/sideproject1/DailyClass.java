@@ -93,8 +93,6 @@ public class DailyClass {
 
     @Override
     public String toString() {
-        return "(" + start +
-                ", " + end + ")" + courseCode + '\'' + sectionCode + '\'' + date + '\'' +
-                '}';
+        return " {"+courseCode + ", "+ sectionCode +", " + date + ", (" + start + "-" + end + ")} ";
     }
 }
