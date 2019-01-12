@@ -38,7 +38,7 @@ public class DailyClass {
      * @param start   the starting time of the class
      * @param end     the end time of the class
      */
-    public DailyClass(String date, String course, String section, int start, int end) {
+    DailyClass(String date, String course, String section, int start, int end) {
         this.start = start;
         this.end = end;
         this.courseCode = course;
@@ -93,6 +93,6 @@ public class DailyClass {
 
     @Override
     public String toString() {
-        return " {"+courseCode + ", "+ sectionCode +", " + date + ", (" + start + "-" + end + ")} ";
+        return " {" + courseCode + ", " + sectionCode + ", " + date + ", (" + start + "-" + end + ")} ";
     }
 }

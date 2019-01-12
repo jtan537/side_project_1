@@ -39,10 +39,10 @@ public class Course {
 
     /**
      * Add a new lecture to the lecture list.
-
+     *
      * @param newLecture the new lecture to add.
      */
-    public void addLecture(Lecture newLecture){
+    public void addLecture(Lecture newLecture) {
         this.sectionLst.add(newLecture);
     }
 

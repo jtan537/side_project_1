@@ -2,7 +2,6 @@ package com.example.jimmy.sideproject1;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * The lecture class with some properties.
@@ -31,7 +30,7 @@ public class Lecture {
      * @param sectionCode section code as a string, i.e. 'Lec 0501'
      * @param time        the list with starting time and end time, i.e. [18, 21]
      */
-    public Lecture(String course, String sectionCode, List<DailyClass> time) {
+    Lecture(String course, String sectionCode, List<DailyClass> time) {
         this.sectionCode = sectionCode;
         this.timeLst = time;
         this.courseCode = course;
@@ -42,7 +41,7 @@ public class Lecture {
      *
      * @param class_ the new DailyClass object to add.
      */
-    public void addClass(DailyClass class_) {
+    void addClass(DailyClass class_) {
         this.timeLst.add(class_);
     }
 
@@ -52,7 +51,7 @@ public class Lecture {
      *
      * @return The time hashmao
      */
-    public List<DailyClass> getTimeLst() {
+    List<DailyClass> getTimeLst() {
         return timeLst;
     }
 
@@ -61,7 +60,7 @@ public class Lecture {
      *
      * @return section code as a string, i.e. 'Lec0501'.
      */
-    public String getSectionCode() {
+    String getSectionCode() {
         return sectionCode;
     }
 
@@ -70,7 +69,7 @@ public class Lecture {
      *
      * @return course code as a string, i.e. 'CSC207'.
      */
-    public String getCourseCode() {
+    String getCourseCode() {
         return courseCode;
     }
 
@@ -80,11 +79,11 @@ public class Lecture {
      * @param o other lecture object to check
      * @return true if two lecture has any time overlap, false otherwise.
      */
-    public boolean hasOverlap(Lecture o) {
+    boolean hasOverlap(Lecture o) {
         for (DailyClass c : timeLst) {
             if (findDate(c.getDate(), o.getTimeLst()).size() > 0) {
-                for (DailyClass d: findDate(c.getDate(), o.getTimeLst())){
-                    if (overLap(c, d)){
+                for (DailyClass d : findDate(c.getDate(), o.getTimeLst())) {
+                    if (overLap(c, d)) {
                         return true;
                     }
                 }
@@ -119,7 +118,7 @@ public class Lecture {
      */
 
     //
-    public static boolean overLap(DailyClass lst1, DailyClass lst2) {
+    private static boolean overLap(DailyClass lst1, DailyClass lst2) {
         return ((lst1.getEnd() > lst2.getStart() && lst1.getEnd() < lst2.getEnd())) ||
                 ((lst1.getStart() > lst2.getStart() && lst1.getStart() < lst2.getEnd())) ||
                 (lst2.getEnd() > lst1.getStart() && lst2.getEnd() < lst1.getEnd()) ||

@@ -49,8 +49,8 @@ public class CourseManager {
 
     /**
      * A helper to create a Course object based on the list contains all DailyClass objects this course has
+     *
      * @param all_class the list contains all classes this course has
-
      * @return a Course object.
      */
     private Course createCourse(List<DailyClass> all_class) {
@@ -83,38 +83,56 @@ public class CourseManager {
      *
      * @return the list contains all valid TimeTable objects
      */
-    public ArrayList<TimeTable> generate_timetable() {
-        ArrayList<Lecture> timetable = new ArrayList<>();
-        for (Lecture k : courseLst.get(0).getSectionLst()) {
-            for (Lecture l : courseLst.get(1).getSectionLst()) {
-                if (!(k.hasOverlap(l))) {
-                    Lecture temp = merge(k, l);
-                    for (Lecture x : courseLst.get(2).getSectionLst()) {
-                        if (!(temp.hasOverlap(x))) {
-                            Lecture temp1 = new Lecture(temp.getCourseCode(), temp.getSectionCode(), temp.getTimeLst());
-                            temp1 = merge(temp1, x);
-                            for (Lecture y : courseLst.get(3).getSectionLst()) {
-                                if (!(temp1.hasOverlap(y))) {
-                                    Lecture temp2 = new Lecture(temp1.getCourseCode(), temp1.getSectionCode(), temp1.getTimeLst());
-                                    temp2 = merge(temp2, y);
-                                    for (Lecture z : courseLst.get(4).getSectionLst()) {
-                                        if (!(temp2.hasOverlap(z))) {
-                                            Lecture temp3 = new Lecture(temp2.getCourseCode(), temp2.getSectionCode(), temp2.getTimeLst());
-                                            temp3 = merge(temp3, z);
-                                            timetable.add(temp3);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+    public List<TimeTable> generate_timetable() {
+        List<Lecture> timetable = new ArrayList<>();
+        for (Lecture l1 : courseLst.get(0).getSectionLst()) {
+            recursiveChecker(l1, courseLst, courseLst.size() - 1, timetable);
+//            for (Lecture l : courseLst.get(1).getSectionLst()) {
+//                if (!(k.hasOverlap(l))) {
+//                    Lecture temp = merge(k, l);
+//                    for (Lecture x : courseLst.get(2).getSectionLst()) {
+//                        if (!(temp.hasOverlap(x))) {
+//                            Lecture temp1 = new Lecture(temp.getCourseCode(), temp.getSectionCode(), temp.getTimeLst());
+//                            temp1 = merge(temp1, x);
+//                            for (Lecture y : courseLst.get(3).getSectionLst()) {
+//                                if (!(temp1.hasOverlap(y))) {
+//                                    Lecture temp2 = new Lecture(temp1.getCourseCode(), temp1.getSectionCode(), temp1.getTimeLst());
+//                                    temp2 = merge(temp2, y);
+//                                    for (Lecture z : courseLst.get(4).getSectionLst()) {
+//                                        if (!(temp2.hasOverlap(z))) {
+//                                            Lecture temp3 = new Lecture(temp2.getCourseCode(), temp2.getSectionCode(), temp2.getTimeLst());
+//                                            temp3 = merge(temp3, z);
+//                                            timetable.add(temp3);
+//                                        }
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
         }
-        for (Lecture l: timetable){
-            System.out.println(l+"\n");
+        for (Lecture l : timetable) {
+            System.out.println(l + "\n");
         }
         return decoder(timetable);
+    }
+
+    private void recursiveChecker(Lecture l1, List<Course> lst, int depth, List<Lecture> timeTables){
+        int index = lst.size() - depth;
+        if (depth != 0) {
+            Lecture newTemp;
+            for (Lecture l2 : lst.get(index).getSectionLst()){
+                if (!(l1.hasOverlap(l2))) {
+                    Lecture temp = merge(l1, l2);
+                    depth--;
+                    newTemp = new Lecture(temp.getCourseCode(), temp.getSectionCode(), temp.getTimeLst());
+                    recursiveChecker(newTemp, lst, depth, timeTables);
+                }
+            }
+        } else {
+            timeTables.add(l1);
+        }
     }
 
     /**
@@ -123,10 +141,14 @@ public class CourseManager {
      * @param timetable list of merged lecture objects.
      * @return list of TimeTable object.
      */
-    private ArrayList<TimeTable> decoder(ArrayList<Lecture> timetable) {
-        ArrayList<TimeTable> timeTable = new ArrayList<>();
+    private List<TimeTable> decoder(List<Lecture> timetable) {
+        List<TimeTable> timeTable = new ArrayList<>();
         for (Lecture lec : timetable) {
-            timeTable.add(new TimeTable(lec));
+            if (lec.getCourseCode().equals("null")){
+                return null;
+            } else {
+                timeTable.add(new TimeTable(lec));
+            }
         }
         return timeTable;
     }
