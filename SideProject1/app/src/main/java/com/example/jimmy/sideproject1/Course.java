@@ -23,7 +23,7 @@ public class Course {
      * @param sectionlst the list contains all section information (lecture objects)
      * @param courseCode the course code as a string
      */
-    public Course(String courseCode, ArrayList<Lecture> sectionlst) {
+    Course(String courseCode, ArrayList<Lecture> sectionlst) {
         this.courseCode = courseCode;
         this.sectionLst = sectionlst;
     }
@@ -33,7 +33,7 @@ public class Course {
      *
      * @return the arraylist with key section code and value section information.
      */
-    public ArrayList<Lecture> getSectionLst() {
+    ArrayList<Lecture> getSectionLst() {
         return sectionLst;
     }
 
@@ -42,7 +42,7 @@ public class Course {
      *
      * @param newLecture the new lecture to add.
      */
-    public void addLecture(Lecture newLecture) {
+    void addLecture(Lecture newLecture) {
         this.sectionLst.add(newLecture);
     }
 

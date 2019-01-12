@@ -69,7 +69,7 @@ public class DailyClass {
      *
      * @return the course code as a string.
      */
-    public String getCourseCode() {
+    String getCourseCode() {
         return courseCode;
     }
 
@@ -78,7 +78,7 @@ public class DailyClass {
      *
      * @return the section code as a string,
      */
-    public String getSectionCode() {
+    String getSectionCode() {
         return sectionCode;
     }
 

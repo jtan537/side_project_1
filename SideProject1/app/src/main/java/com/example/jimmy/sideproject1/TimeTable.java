@@ -18,7 +18,7 @@ public class TimeTable {
      *
      * @param lecture the lecture object with a list contains DailyClass objects.
      */
-    public TimeTable(Lecture lecture) {
+    TimeTable(Lecture lecture) {
         for (DailyClass d : lecture.getTimeLst()) {
             dailyClasses.add(d);
         }

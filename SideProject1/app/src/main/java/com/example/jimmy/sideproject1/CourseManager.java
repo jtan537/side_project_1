@@ -24,7 +24,7 @@ public class CourseManager {
      *
      * @param courseCodeLst the list contains all the course object.
      */
-    public CourseManager(List<String> courseCodeLst) throws IOException {
+    CourseManager(List<String> courseCodeLst) throws IOException {
         for (String s : courseCodeLst) {
             this.courseLst.add(createCourse(infoSlicer.instantiateDailyClasses(s)));
         }
@@ -118,11 +118,20 @@ public class CourseManager {
         return decoder(timetable);
     }
 
-    private void recursiveChecker(Lecture l1, List<Course> lst, int depth, List<Lecture> timeTables){
+    /**
+     * The recursive function calling on next course to check if the passed in lecture section has
+     * overlap with the next course
+     *
+     * @param l1         the previous lecture section (could be a merged produt of several courses)
+     * @param lst        the list contains all courses user choose
+     * @param depth      the courses left to compare with
+     * @param timeTables the list of lecture which is the final timetable
+     */
+    private void recursiveChecker(Lecture l1, List<Course> lst, int depth, List<Lecture> timeTables) {
         int index = lst.size() - depth;
         if (depth != 0) {
             Lecture newTemp;
-            for (Lecture l2 : lst.get(index).getSectionLst()){
+            for (Lecture l2 : lst.get(index).getSectionLst()) {
                 if (!(l1.hasOverlap(l2))) {
                     Lecture temp = merge(l1, l2);
                     depth--;
@@ -144,11 +153,7 @@ public class CourseManager {
     private List<TimeTable> decoder(List<Lecture> timetable) {
         List<TimeTable> timeTable = new ArrayList<>();
         for (Lecture lec : timetable) {
-            if (lec.getCourseCode().equals("null")){
-                return null;
-            } else {
-                timeTable.add(new TimeTable(lec));
-            }
+            timeTable.add(new TimeTable(lec));
         }
         return timeTable;
     }
