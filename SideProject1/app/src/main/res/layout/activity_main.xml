@@ -20,6 +20,18 @@
         android:autofillHints="" />
 
     <EditText
+        android:id="@+id/courseCode6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="220dp"
+        android:layout_marginTop="16dp"
+        android:autofillHints=""
+        android:hint="@string/enter_course"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
         android:id="@+id/courseCode2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

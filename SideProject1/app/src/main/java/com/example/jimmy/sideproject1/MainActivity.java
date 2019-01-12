@@ -28,12 +28,14 @@ public class MainActivity extends AppCompatActivity {
                 EditText courseText3 = findViewById(R.id.courseCode3);
                 EditText courseText4 = findViewById(R.id.courseCode4);
                 EditText courseText5 = findViewById(R.id.courseCode5);
+                EditText courseText6 = findViewById(R.id.courseCode6);
 
                 courseCodes[0] = courseText1.getText().toString();
                 courseCodes[1] = courseText2.getText().toString();
                 courseCodes[2] = courseText3.getText().toString();
                 courseCodes[3] = courseText4.getText().toString();
                 courseCodes[4] = courseText5.getText().toString();
+                courseCodes[5] = courseText6.getText().toString();
 
                 switchToTimetable();
             }

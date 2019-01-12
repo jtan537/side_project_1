@@ -1,21 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TimetableActivity">
+    android:orientation="vertical"
+    android:background="#eff5ff">
 
     <GridView
-        android:id="@+id/ScoreBoardGridView"
-        android:layout_width="383dp"
-        android:layout_height="509dp"
+        android:id="@+id/TimetableGridView"
+        android:layout_width="333dp"
+        android:layout_height="411dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="59dp"
         android:columnWidth="100dp"
         android:gravity="center"
-        android:numColumns="6"
-        android:stretchMode="columnWidth"></GridView>
+        android:numColumns="3"
+        android:stretchMode="columnWidth"
+        android:textAlignment="center"
+        tools:layout_editor_absoluteX="26dp"
+        tools:layout_editor_absoluteY="50dp"></GridView>
 
 
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>
